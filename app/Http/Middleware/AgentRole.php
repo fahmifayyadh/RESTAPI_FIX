@@ -6,7 +6,7 @@ use Closure;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 
-class AdminRole
+class AgentRole
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,6 @@ class AdminRole
      */
     public function handle($request, Closure $next)
     {
-
       try {
         $token = Crypt::decrypt($request->header);
       } catch (\Exception $e) {
@@ -27,10 +26,11 @@ class AdminRole
       $data = explode('+',$token);
       $user = User::where('email', $data[0])->first();
 
-      if ($user->role != 'admin') {
+      if ($user->role != 'agent' || $user->role !='admin') {
         return response()->json(['error'=>'page Not found'], 400);
       }
 
         return $next($request);
+    }
     }
 }

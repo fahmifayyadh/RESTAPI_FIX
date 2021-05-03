@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TableUser extends Migration
+class CreateVisitationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class TableUser extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('visitations', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->enum('role', ['admin', 'agent']);
-            $table->text('api_token');
+            $table->integer('place_id');
+            $table->integer('user_id');
+            $table->integer('visitor');
+            $table->integer('user_visits_id')->nullable();
+            $table->date('date');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class TableUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('visitations');
     }
 }

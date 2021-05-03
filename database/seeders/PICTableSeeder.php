@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Pic;
 
-class DatabaseSeeder extends Seeder
+class PICTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserTableSeeder::class);
-        $this->call(PICTableSeeder::class);
-        $this->call(PlaceTableSeeder::class);
+      PIC::create([
+          'user_id' => 2,
+          'place_id' => 1
+      ]);
     }
 }

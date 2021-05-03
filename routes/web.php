@@ -24,6 +24,18 @@ $router->get('/', function () use ($router) {
 // $router->post("/register", "AuthController@register");
 
 $router->post("/login", "AuthController@login");
+
+$router->group(['middleware' => (['auth','role.admin'])], function () use ($router) {
+  $router->get("/place/{skip}/{take}", "admin\PlaceController@index");
+  $router->post('/place/create', 'admin\PlaceController@store');
+  $router->put("/place/{id}/update", "admin\PlaceController@update");
+  $router->delete('/place/{id}/delete', 'admin\PlaceController@destroy');
+
+  $router->get('/user/{skip}/{take}', 'admin\UserController@index');
+  $router->post('/user/create', 'admin\UserController@store');
+  
+});
+
 $router->group(['middleware' => 'auth'], function () use ($router) {
   $router->get("/user", "UserController@index");
 });

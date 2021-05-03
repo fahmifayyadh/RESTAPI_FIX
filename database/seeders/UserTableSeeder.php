@@ -18,11 +18,11 @@ class UserTableSeeder extends Seeder
     {
       $username = ['user demo', 'admin demo', 'real admin'];
       $email = ['userdemo@gmail.com', 'admindemo@gmail.com', 'admin@gmail.com'];
-      $role =['guest', 'guest', 'admin'];
+      $role =['agent', 'agent', 'admin'];
       $password = 'userdemo';
 
       for ($i=0; $i < 3; $i++) {
-        $token = Crypt::encrypt($email[$i], $password);
+        $token = Crypt::encrypt($email[$i].'+'. $password);
           User::create([
             'username' => $username[$i],
             'email' => $email[$i],
