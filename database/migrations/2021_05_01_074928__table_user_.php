@@ -20,6 +20,7 @@ class TableUser extends Migration
             $table->string('password');
             $table->enum('role', ['admin', 'agent']);
             $table->text('api_token');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

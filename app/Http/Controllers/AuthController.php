@@ -17,7 +17,7 @@ class AuthController extends Controller
         ]);
         $user = User::where('email', $request->email)->first();
 
-      if (User::where('email', $request->email)->first() && Hash::check($request->password, $user->password)) {
+      if (User::where('email', $request->email)->where('active', 1)->first() && Hash::check($request->password, $user->password)) {
         $token = Crypt::encrypt($user->email.'+'.$user->password);
         $user->update([
           'api_token' => $token,

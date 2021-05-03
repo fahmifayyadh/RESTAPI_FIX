@@ -97,7 +97,35 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+            'username' => 'string|required',
+            'email' => 'email|required',
+            'password' => 'string|min:5',
+            'role' => 'integer|required',
+        ]);
+
+        DB::beginTransaction();
+        $user = User::findOrFail($id);
+        try {
+          $user->update([
+            'username' => $request->username,
+            'email' => $request->email,
+            'role' => $request->role,
+            // 'api_token' => $api_token,
+          ]);
+          if (!empty($request->password)) {
+            $pwd = Hash::make($request->password);
+            // $api_token = $token = Crypt::encrypt($request->email.'+'.$pwd);
+            $user->update([
+              'password' => $pwd
+            ]);
+          }
+        } catch (\Exception $e) {
+          DB::rollback();
+          return response()->json(['error' => 'error create user, check your input'], 500);
+        }
+        DB::commit();
+        return response()->json(['success' => 'success create user'], 200);
     }
 
     /**
@@ -108,6 +136,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        DB::beginTransaction();
+        try {
+          $user->update([
+            'active' => 0
+          ]);
+        } catch (\Exception $e) {
+          DB::rollback;
+          return response()->json(['error'=>'error delete data'], 500);
+        }
+        DB::commit();
+        return response()->json(['success'=> 'success delete data'], 200);
+
     }
 }

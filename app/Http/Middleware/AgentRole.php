@@ -26,11 +26,10 @@ class AgentRole
       $data = explode('+',$token);
       $user = User::where('email', $data[0])->first();
 
-      if ($user->role != 'agent' || $user->role !='admin') {
-        return response()->json(['error'=>'page Not found'], 400);
-      }
-
+      if ($user->role == 'admin' || $user->role == 'agent') {
         return $next($request);
-    }
+      }
+      return response()->json(['error'=>'page Not found'], 400);
+
     }
 }

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visitation extends Model
 {
-    //
+    protected $guarded = [];
 }
