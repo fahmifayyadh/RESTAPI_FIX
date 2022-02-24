@@ -20,6 +20,8 @@ class PlaceTableSeeder extends Seeder
       for ($i=0; $i < 6; $i++) {
         Place::create([
             'name' => $name[$i],
+            'fee_local' => 50000,
+            'fee_inter' => 100000,
             'location' => $location[$i],
         ]);
       }
