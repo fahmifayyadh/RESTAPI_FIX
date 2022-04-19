@@ -28,11 +28,13 @@ $router->post("/login", "AuthController@login");
 $router->group(['middleware' => (['auth','role.admin']), 'prefix' => 'admin'], function () use ($router) {
   $router->post('/place/create', 'admin\PlaceController@store');
   $router->put("/place/{id}/update", "admin\PlaceController@update");
+  $router->get("/place/{id}/update", "admin\PlaceController@edit");
   $router->delete('/place/{id}/delete', 'admin\PlaceController@destroy');
   $router->get("/place/{skip}/{take}", "admin\PlaceController@index");
 
   $router->post('/user/create', 'admin\UserController@store');
-  $router->put('/user/{id}/update', 'admin\UserController@update');
+    $router->get('/user/{id}/update', 'admin\UserController@edit');
+    $router->put('/user/{id}/update', 'admin\UserController@update');
   $router->delete('/user/{id}/delete', 'admin\UserController@destroy');
   $router->get('/user/{skip}/{take}', 'admin\UserController@index');
 

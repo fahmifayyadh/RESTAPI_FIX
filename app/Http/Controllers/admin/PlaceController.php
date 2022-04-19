@@ -90,7 +90,8 @@ class PlaceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $place = Place::findOrFail($id);
+        return response()->json(['place'=>$place], 200);
     }
 
     /**

@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class GraphicController extends Controller
 {
     public function index(){
-        $kehadiran = UserVisit::where()
+//        $kehadiran = UserVisit::where()
     }
 }
