@@ -57,7 +57,7 @@ class PlaceController extends Controller
       try {
         $place = Place::create([
           'name' => $request->name,
-          'image' => $image->storeAs('public/place', $filenametostore),
+          'image' => $image->storeAs('storage/place', $filenametostore),
           'location' => $request->location,
           'fee_local' => $request->fee_local,
           'fee_inter' => $request->fee_inter,
@@ -140,7 +140,7 @@ class PlaceController extends Controller
               Storage::delete($place->image);
             }
             $place->update([
-              'image' => $image->storeAs('public/place', $filenametostore),
+              'image' => $image->storeAs('storage/place', $filenametostore),
             ]);
           } catch (\Exception $e) {
             DB::roleback();
