@@ -27,7 +27,7 @@ class CountryController extends Controller
         return response()->json(['message' => 'success create data'], 200);
     }
 
-    public function edit(Request $request ,$id){
+    public function update(Request $request ,$id){
         $country = Country::findOrFail($id);
 
         DB::beginTransaction();
