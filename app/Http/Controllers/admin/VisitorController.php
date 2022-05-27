@@ -53,6 +53,7 @@ class VisitorController extends Controller
       $this->validate($request, [
             'place_id' => 'integer|required',
             'visitor' => 'integer|required',
+          'user_visit' => 'integer',
             'date' => 'date|required',
         ]);
 
@@ -66,6 +67,7 @@ class VisitorController extends Controller
             'place_id' => $request->place_id,
             'user_id' => $user->id,
             'visitor' => $request->visitor,
+            'user_visits_id' => $request->user_visit,
             'date' => Carbon::createFromFormat('Y-m-d', $request->date)
           ]);
         } catch (\Exception $e) {

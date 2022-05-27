@@ -51,6 +51,11 @@ $router->group(['middleware' => (['auth','role.admin']), 'prefix' => 'admin'], f
   $router->put('/visit/{id}/update', 'admin\VisitorController@update');
   $router->delete('/visit/{id}/delete', 'admin\VisitorController@destroy');
   $router->get('/visit/{skip}/{take}', 'admin\VisitorController@index');
+
+    $router->group(['prefix'=>'country'], function () use ($router){
+        $router->put('/update', 'admin\CountryController@update');
+        $router->delete('/{id}/delete', 'admin\CountryController@delete');
+    });
 });
 
 $router->group(['middleware' => (['auth','role.agent']),'prefix' => 'agent'], function () use ($router) {
@@ -60,6 +65,20 @@ $router->group(['middleware' => (['auth','role.agent']),'prefix' => 'agent'], fu
   $router->put('/visit/{place_id}/{id}/update', 'agent\VisitorController@update');
   $router->delete('/visit/{place_id}/{id}/delete', 'agent\VisitorController@destroy');
   $router->get('/visit/{place_id}/{skip}/{take}', 'agent\VisitorController@index');
+
+
+  $router->group(['prefix'=>'visitor'], function () use ($router){
+      $router->get('/{skip}/{take}', 'admin\UserVisitController@index');
+      $router->post('/create', 'admin\UserVisitController@create');
+      $router->put('/update', 'admin\UserVisitController@update');
+      $router->delete('/{id}/delete', 'admin\UserVisitController@delete');
+      $router->get('/detail/{iid}', 'admin\UserVisitController@detail');
+  });
+
+    $router->group(['prefix'=>'country'], function () use ($router){
+        $router->get('/', 'admin\CountryController@index');
+        $router->post('/create', 'admin\CountryController@create');
+    });
 });
 
 $router->group(['middleware' => 'auth'], function () use ($router) {

@@ -18,9 +18,10 @@ class CreateUserVisitsTable extends Migration
             $table->string('name');
             $table->enum('identity', ['id_card', 'drive_lisense', 'passport', 'student_card']);
             $table->string('identity_number');
+            $table->boolean('overseas');
+            $table->string('country')->nullable();
             $table->string('province');
             $table->string('district');
-            $table->boolean('overseas');
             $table->timestamps();
         });
     }
