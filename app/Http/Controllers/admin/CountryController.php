@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class CountryController extends Controller
 {
     public function index(){
-        $country = Country::where('active', 1)->get();
+        $country = Country::where('active', 1)->select('id', 'name')->get();
         return response()->json(['country' => $country], 200);
     }
     public function create(Request $request ){
