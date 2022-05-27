@@ -28,18 +28,21 @@ class CountryController extends Controller
     }
 
     public function update(Request $request ,$id){
+        $this->validate($request, [
+            'name' => 'string|required',
+        ]);
         $country = Country::findOrFail($id);
 
-        DB::beginTransaction();
-        try {
+//        DB::beginTransaction();
+//        try {
             $country->update([
                 'name' => $request->name,
             ]);
-        }catch (\Exception $exception){
-            DB::rollBack();
-            return response()->json(['message'=>'error update data'], 400);
-        }
-        DB::commit();
+//        }catch (\Exception $exception){
+//            DB::rollBack();
+//            return response()->json(['message'=>'error update data'], 400);
+//        }
+//        DB::commit();
         return response()->json(['message' => 'success update data'], 200);
     }
     public function delete($id){
