@@ -53,7 +53,7 @@ $router->group(['middleware' => (['auth','role.admin']), 'prefix' => 'admin'], f
   $router->get('/visit/{skip}/{take}', 'admin\VisitorController@index');
 
     $router->group(['prefix'=>'country'], function () use ($router){
-        $router->put('/update', 'admin\CountryController@update');
+        $router->put('/{id}/update', 'admin\CountryController@update');
         $router->delete('/{id}/delete', 'admin\CountryController@delete');
     });
 });
