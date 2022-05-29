@@ -44,7 +44,7 @@ class UserVisitController extends Controller
     }
 
     public function detail($id){
-        $visitor = findOrFail($id);
+        $visitor = UserVisit::findOrFail($id);
         return response()->json(['user_visitor' => $visitor], 200);
     }
 
@@ -58,7 +58,7 @@ class UserVisitController extends Controller
             'overseas' => 'integer|required',
             'country' => 'string',
         ]);
-        $visitor = findOrFail($id);
+        $visitor = UserVisit::findOrFail($id);
         DB::beginTransaction();
         try {
             $visitor->update([
@@ -79,7 +79,7 @@ class UserVisitController extends Controller
     }
 
     public function delete($id){
-        $visit = findOrFail($id);
+        $visit = UserVisit::findOrFail($id);
         DB::beginTransaction();
         try {
             $visit->update([
