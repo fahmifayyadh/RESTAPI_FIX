@@ -29,7 +29,7 @@ class UserVisitController extends Controller
             UserVisit::create([
                 'name' => $request->name,
                 'identity' => $request->identity,
-                'indentity_number' => $request->indentity_number,
+                'identity_number' => $request->identity_number,
                 'province' => $request->province,
                 'district' => $request->district,
                 'overseas' => $request->overseas,
