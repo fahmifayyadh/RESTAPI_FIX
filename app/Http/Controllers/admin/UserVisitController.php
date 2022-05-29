@@ -37,7 +37,7 @@ class UserVisitController extends Controller
             ]);
         }catch ( \Exception $exception){
             DB::rollBack();
-            return response()->json(['message'=>'error create data visitor user data'], 400);
+            return response()->json(['message'=>$exception], 400);
         }
         DB::commit();
         return response()->json(['message' =>' success create visitor user data'], 200);
