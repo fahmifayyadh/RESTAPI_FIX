@@ -22,6 +22,7 @@ class CreateUserVisitsTable extends Migration
             $table->string('country')->nullable();
             $table->string('province');
             $table->string('district');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

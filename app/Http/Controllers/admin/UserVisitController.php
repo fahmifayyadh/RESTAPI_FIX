@@ -22,6 +22,7 @@ class UserVisitController extends Controller
             'province' => 'required',
             'district' => 'required',
             'overseas' => 'integer|required',
+            'country' => 'string',
         ]);
         DB::beginTransaction();
         try {
@@ -32,6 +33,7 @@ class UserVisitController extends Controller
                 'province' => $request->province,
                 'district' => $request->district,
                 'overseas' => $request->overseas,
+                'country' => $request->country,
             ]);
         }catch ( \Exception $exception){
             DB::rollBack();
@@ -54,6 +56,7 @@ class UserVisitController extends Controller
             'province' => 'required',
             'district' => 'required',
             'overseas' => 'integer|required',
+            'country' => 'string',
         ]);
         $visitor = findOrFail($id);
         DB::beginTransaction();
@@ -65,6 +68,7 @@ class UserVisitController extends Controller
                 'province' => $request->province,
                 'district' => $request->district,
                 'overseas' => $request->overseas,
+                'country' => $request->country
             ]);
         }catch ( \Exception $exception){
             DB::rollBack();
@@ -78,7 +82,9 @@ class UserVisitController extends Controller
         $visit = findOrFail($id);
         DB::beginTransaction();
         try {
-            $visit->delete();
+            $visit->update([
+                'active' => 0
+            ]);
         }catch (\Exception $exception){
             DB::rollBack();
             return response()->json(['message'=> 'error delete data'], 400);

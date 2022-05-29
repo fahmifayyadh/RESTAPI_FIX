@@ -70,9 +70,9 @@ $router->group(['middleware' => (['auth','role.agent']),'prefix' => 'agent'], fu
   $router->group(['prefix'=>'visitor'], function () use ($router){
       $router->get('/{skip}/{take}', 'admin\UserVisitController@index');
       $router->post('/create', 'admin\UserVisitController@create');
-      $router->put('/update', 'admin\UserVisitController@update');
+      $router->put('/{id}/update', 'admin\UserVisitController@update');
       $router->delete('/{id}/delete', 'admin\UserVisitController@delete');
-      $router->get('/detail/{iid}', 'admin\UserVisitController@detail');
+      $router->get('/{id}/detail/', 'admin\UserVisitController@detail');
   });
 
     $router->group(['prefix'=>'country'], function () use ($router){
