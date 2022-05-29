@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class UserVisitController extends Controller
 {
     public function index($skip=0, $take =15){
-        $visitor = UserVisit::orderBy('name', 'desc')->skip($skip)->take($take)->get();
+        $visitor = UserVisit::orderBy('name', 'asc')->skip($skip)->take($take)->where('active', 1)->select('id', 'name', 'overseas', 'district')->get();
         return response()->json(['user_visit' =>$visitor], 200);
 
     }
