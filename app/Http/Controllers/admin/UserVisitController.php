@@ -35,9 +35,9 @@ class UserVisitController extends Controller
                 'overseas' => $request->overseas,
                 'country' => $request->country,
             ]);
-        }catch ( \Error $error){
+        }catch ( \Exception $exception){
             DB::rollBack();
-            return response()->json(['message'=>$error], 400);
+            return response()->json(['message'=> 'error create data visitor data user'], 400);
         }
         DB::commit();
         return response()->json(['message' =>' success create visitor user data'], 200);
@@ -64,7 +64,7 @@ class UserVisitController extends Controller
             $visitor->update([
                 'name' => $request->name,
                 'identity' => $request->identity,
-                'indentity_number' => $request->indentity_number,
+                'identity_number' => $request->identity_number,
                 'province' => $request->province,
                 'district' => $request->district,
                 'overseas' => $request->overseas,
