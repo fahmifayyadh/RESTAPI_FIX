@@ -13,5 +13,6 @@ class ReportController extends Controller
             ->leftJoin('visitations','visitations.place_id', '=', 'places.id' )
             ->select('places.name as destinasi', 'visitations.visitor', 'visitations.date')
             ->orderBy('visitations.date','asc')->get();
+        return response()->json(['kunjungan'=> $kunjungan], 200);
     }
 }
