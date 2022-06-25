@@ -56,6 +56,8 @@ $router->group(['middleware' => (['auth','role.admin']), 'prefix' => 'admin'], f
         $router->put('/{id}/update', 'admin\CountryController@update');
         $router->delete('/{id}/delete', 'admin\CountryController@delete');
     });
+
+    $router->get('/laporan/kunjungan', 'ReportController@kunjunganadmin');
 });
 
 $router->group(['middleware' => (['auth','role.agent']),'prefix' => 'agent'], function () use ($router) {
